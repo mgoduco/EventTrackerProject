@@ -1,5 +1,9 @@
 package com.skilldistillery.takeout.entities;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,19 +16,28 @@ public class Food {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	private String name;
+
+	private String description;
+
+	private Double price;
+
+	@Column(name = "purchase_date")
+	private LocalDateTime purchaseDate;
+
+	private Integer rating;
 
 	public Food() {
 		super();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -36,9 +49,59 @@ public class Food {
 		this.name = name;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public LocalDateTime getPurchaseDate() {
+		return purchaseDate;
+	}
+
+	public void setPurchaseDate(LocalDateTime purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Food other = (Food) obj;
+		return Objects.equals(id, other.id);
+	}
+
 	@Override
 	public String toString() {
-		return "Food [id=" + id + ", name=" + name + "]";
+		return "Food [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
+				+ ", purchaseDate=" + purchaseDate + ", rating=" + rating + "]";
 	}
 
 }

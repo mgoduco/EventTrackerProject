@@ -23,6 +23,10 @@ DROP TABLE IF EXISTS `takeout` ;
 CREATE TABLE IF NOT EXISTS `takeout` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(200) NULL,
+  `price` DOUBLE NULL,
+  `purchase_date` DATETIME NULL,
+  `rating` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -42,7 +46,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `takeoutdb`;
-INSERT INTO `takeout` (`id`, `name`) VALUES (1, 'Sushi');
+INSERT INTO `takeout` (`id`, `name`, `description`, `price`, `purchase_date`, `rating`) VALUES (1, 'Japanese', 'Dragon Roll, Salmon Nigiri', 22.87, '2022-05-04', 5);
+INSERT INTO `takeout` (`id`, `name`, `description`, `price`, `purchase_date`, `rating`) VALUES (2, 'Mexican', 'El Pastor Tacos, Birria Tacos', 14.22, '2022-04-25', 4);
+INSERT INTO `takeout` (`id`, `name`, `description`, `price`, `purchase_date`, `rating`) VALUES (3, 'American', 'Double Bacon Cheesburger, Fries, Oreo Shake', 19.78, '2022-03-09', 4);
+INSERT INTO `takeout` (`id`, `name`, `description`, `price`, `purchase_date`, `rating`) VALUES (4, 'Middle Eastern', 'Mixed Grill, Syrian Pie, Kibbeh', 34.99, '2022-05-28', 5);
+INSERT INTO `takeout` (`id`, `name`, `description`, `price`, `purchase_date`, `rating`) VALUES (5, 'American', 'Eggs Benedict Special, Coffee', 12.88, '2022-05-21', 3);
 
 COMMIT;
 

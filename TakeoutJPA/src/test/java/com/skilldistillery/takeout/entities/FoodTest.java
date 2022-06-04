@@ -45,6 +45,11 @@ class FoodTest {
 	@DisplayName("Testing basic mappings")
 	void test1() {
 		assertNotNull(food);
-		assertEquals("Sushi", food.getName());
+		assertEquals("Japanese", food.getName());
+		assertEquals(04, food.getPurchaseDate().getDayOfMonth());
+		assertEquals("Dragon Roll, Salmon Nigiri", food.getDescription());
+		assertEquals(22.87, food.getPrice());
+		assertEquals(5, food.getRating());
+		
 	}
 }
