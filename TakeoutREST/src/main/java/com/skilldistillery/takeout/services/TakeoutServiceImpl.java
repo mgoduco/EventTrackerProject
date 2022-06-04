@@ -22,9 +22,8 @@ public class TakeoutServiceImpl implements TakeoutService {
 	}
 
 	@Override
-	public Food getById(Integer foodId) {
-		Optional<Food> food = repo.findById(foodId);
-		return food.get();
+	public Optional<Food> getById(Integer foodId) {
+		return repo.findById(foodId);
 	}
 
 	@Override
@@ -58,7 +57,7 @@ public class TakeoutServiceImpl implements TakeoutService {
 	@Override
 	public List<Food> getFoodByName(String keyword) {
 		keyword = "%";
-		return repo.findByNameLike(keyword);
+		return repo.findByName(keyword);
 	}
 
 	@Override
@@ -70,7 +69,5 @@ public class TakeoutServiceImpl implements TakeoutService {
 	public List<Food> getFoodWithinPurchaseDate(LocalDate past, LocalDate present) {
 		return repo.findByPurchaseDateBetween(past, present);
 	}
-
-	
 
 }

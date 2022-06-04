@@ -10,7 +10,7 @@ import com.skilldistillery.takeout.entities.Food;
 
 public interface TakeoutRepository extends JpaRepository<Food, Integer> {
 
-	List<Food> findByNameLike(@Param("keyword") String keyword);
+	List<Food> findByName(@Param("keyword") String keyword);
 
 	List<Food> findByPriceBetween(double low, double high);
 

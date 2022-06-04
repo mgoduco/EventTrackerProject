@@ -2,6 +2,7 @@ package com.skilldistillery.takeout.services;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import com.skilldistillery.takeout.entities.Food;
 
@@ -10,7 +11,7 @@ public interface TakeoutService {
 
 	List<Food> index();
 	
-	Food getById(Integer foodId);
+	Optional<Food> getById(Integer foodId);
 	
 	Food create(Food food);
 	
