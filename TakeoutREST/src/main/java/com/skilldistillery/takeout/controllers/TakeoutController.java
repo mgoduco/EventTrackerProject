@@ -119,4 +119,16 @@ public class TakeoutController {
 //
 //	}
 
+	@GetMapping("food/search/{rating}")
+	public List<Food> getFoodByRating(@PathVariable Integer rating, HttpServletResponse res) {
+		List<Food> foods = service.getFoodByRating(rating);
+		System.out.println(foods);
+		if (foods != null) {
+			res.setStatus(200);
+		} else {
+			res.setStatus(404);
+		}
+		return foods;
+	}
+
 }

@@ -70,4 +70,9 @@ public class TakeoutServiceImpl implements TakeoutService {
 		return repo.findByPurchaseDateBetween(past, present);
 	}
 
+	@Override
+	public List<Food> getFoodByRating(Integer rating) {
+		return repo.findByRating(rating);
+	}
+	
 }

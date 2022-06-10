@@ -25,4 +25,5 @@ public interface TakeoutService {
 	
 	List<Food> getFoodWithinPurchaseDate(LocalDate past, LocalDate present);
 
+	List<Food> getFoodByRating(Integer rating);
 }

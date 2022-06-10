@@ -14,7 +14,7 @@ public interface TakeoutRepository extends JpaRepository<Food, Integer> {
 
 	List<Food> findByPriceBetween(double low, double high);
 
-	
+	List<Food> findByRating(@Param("rating")Integer rating);
 	
 	List<Food> findByPurchaseDateBetween(LocalDate past, LocalDate present);
 }
