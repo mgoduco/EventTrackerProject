@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "takeout")
 public class Food {
@@ -23,7 +25,7 @@ public class Food {
 	private String description;
 
 	private Double price;
-
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
 	@Column(name = "purchase_date")
 	private LocalDateTime purchaseDate;
 
