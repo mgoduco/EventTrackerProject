@@ -41,21 +41,7 @@ function sendNewFood(newFood) {
 	xhr.send(JSON.stringify(newFood));
 }
 
-function deleteFood(food) {
-	let xhr = new XMLHttpRequest();
-	xhr.open('DELETE', `api/food/${food.id}`);
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === 4) {
-			if (xhr.status < 400) {
-				console.log('Food deleted ' + xhr.status);
-			} else {
-				console.log('Error deleting food ' + xhr.status);
-			}
-		}
-	};
-	xhr.setRequestHeader("Content-type", "application/json");
-	xhr.send(JSON.stringify(food));
-}
+
 
 function loadFoodList() {
 	let xhr = new XMLHttpRequest();
@@ -67,7 +53,7 @@ function loadFoodList() {
 				displayFoodList(food);
 			}
 			else {
-				console.log("Error loading food: " + xhr.status)
+				//TODO SHOW ERRORS
 			}
 		}
 	};
@@ -98,21 +84,77 @@ function displayFoodList(foodList) {
 		td = document.createElement('td');
 		td.textContent = food.rating;
 		tr.appendChild(td);
-		let update = document.createElement('button');
-		update.textContent = 'Update';
-		let remove = document.createElement('button');
-		remove.textContent = 'Delete';
-		update.addEventListener('click', function(e){
-		updateFood(food);
-		});
-		remove.addEventListener('click', function(e){
-		deleteFood(food);
-		});
-		table.appendChild(edit);
-		table.appendChild(dele);
-	
+		tr.addEventListener('click',showFoodDetails);
 	}
-	
+}
+
+function deleteFood(food) {
+	let xhr = new XMLHttpRequest();
+	xhr.open('DELETE', `api/food/${food.id}`);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if (xhr.status < 400) {
+				console.log('Deleted food');
+			} else {
+				console.log('Error deleting food: ' + xhr.status);
+			}
+		}
+	};
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.send(JSON.stringify(food));
+}
+
+function updateFood(food) {
+	document.getElementById('foodType').textContent = '';
+	let updateFoodForm = document.createElement('form');
+	updateFoodForm.setAttribute('name', 'updateFoodForm');
+	let div = document.getElementById('tableFormDiv');
+
+	let foodName = document.createElement('label');
+	foodName.textContent = "Food Name: "
+	let foodNameInput = document.createElement('input');
+	foodNameInput.setAttribute('name', 'foodName');
+	foodNameInput.setAttribute('value', food.name);
+	updateFoodForm.appendChild(foodName);
+	updateFoodForm.appendChild(foodNameInput);
+	updateFoodForm.appendChild(document.createElement('br'));
+
+	let button = document.createElement('button');
+	button.textContent = "Update";
+	button.setAttribute('id', 'updateFood');
+	button.addEventListener('click', function(e){
+		e.preventDefault();
+		
+		let updateFood = {
+		name: form.name.value,
+		description: form.description.value,
+		price: form.price.value,
+		purchaseDate: form.purchaseDate.value,
+		rating: form.rating.value
+		};
+		sendUpdateFood(updateFood);
+		updateFoodForm.textContent = '';
+	});
+	updateFoodForm.appendChild(button);
+	div.appendChild(updateRideForm);
+
+}
+
+function getFood(foodId) {
+	let xhr = new XMLHttpRequest();
+	xhr.open('GET', `api/food/${foodId}`);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if (xhr.status === 200 && xhr.responseText) {
+				let food = JSON.parse(xhr.responseText);
+				showFoodDetails(food);
+			}
+			else {
+				displayError('Film not found.')
+			}
+		}
+	};
+	xhr.send();
 }
 
 function displayError(message) {
@@ -120,24 +162,45 @@ function displayError(message) {
 	dataDiv.textContent = message;
 }
 
-function showFoodDetails(evt) {
-	evt.preventDefault();
-	let row = evt.target;
-	console.log(row);
-	let foodId = row.parentElement.firstElementChild.textContent;
-	console.log('Food stuff ' + foodId);
-	
-	let update = document.createElement('button');
-	update.textContent = 'Update';
-	let remove = document.createElement('button');
-	remove.textContent = 'Delete';
-	update.addEventListener('click', function(e){
-		updateFood(food);
-	});
-	remove.addEventListener('click', function(e){
-		deleteFood(food);
-	});
-	table.appendChild(edit);
-	table.appendChild(dele);
-	
+function showFoodDetails(food) {
+    document.getElementById('foodType').textContent = '';
+    let fname = document.createElement('p');
+    let fdescription = document.createElement('p');
+    let fprice = document.createElement('p');
+    let fdate = document.createElement('p');
+    let frating = document.createElement('p');
+    fname.textContent = "Takeout Order: " + food.name;
+    fdescription.textContent = "Description: " + food.description;
+    fprice.textContent = "Price ($): " + food.price;
+    fdate.textContent = "Date Purchased: " + food.date;
+    frating.textContent = "Rating: " + food.rating;
+
+    let table = document.getElementById('foodType');
+    let tr = document.createElement('tr');
+    table.appendChild(tr);
+    let td = document.createElement('td');
+    td.appendChild(fname);
+    td.appendChild(document.createElement('td'));
+    td.appendChild(fdescription);
+    td.appendChild(document.createElement('td'));
+    td.appendChild(fprice);
+    td.appendChild(document.createElement('td'));
+    td.appendChild(fdate);
+    td.appendChild(document.createElement('td'));
+    td.appendChild(frating);
+    td.appendChild(document.createElement('td'));
+
+    let update = document.createElement('button');
+    update.textContent = 'Update';
+    let remove = document.createElement('button');
+    remove.textContent = 'Delete';
+    update.addEventListener('click', function(e) {
+        updateFood(food);
+    });
+    remove.addEventListener('click', function(e) {
+        deleteFood(food);
+    });
+    table.appendChild(update);
+    table.appendChild(remove);
+
 }
