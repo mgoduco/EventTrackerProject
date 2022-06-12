@@ -6,7 +6,7 @@ window.addEventListener('load', function(evt) {
 function init() {
 	console.log('In init()');
 	loadFoodList();
-	
+
 	document.newFoodForm.addFoodButton.addEventListener('click', addNewFood);
 }
 
@@ -84,7 +84,7 @@ function displayFoodList(foodList) {
 		td = document.createElement('td');
 		td.textContent = food.rating;
 		tr.appendChild(td);
-		tr.addEventListener('click',showFoodDetails);
+		tr.addEventListener('click', showFoodDetails);
 	}
 }
 
@@ -105,7 +105,8 @@ function deleteFood(food) {
 }
 
 function updateFood(food) {
-	document.getElementById('foodType').textContent = '';
+	let tbody = document.getElementById('foodTable')
+	tbody.textContent = '';
 	let updateFoodForm = document.createElement('form');
 	updateFoodForm.setAttribute('name', 'updateFoodForm');
 	let div = document.getElementById('tableFormDiv');
@@ -122,21 +123,21 @@ function updateFood(food) {
 	let button = document.createElement('button');
 	button.textContent = "Update";
 	button.setAttribute('id', 'updateFood');
-	button.addEventListener('click', function(e){
+	button.addEventListener('click', function(e) {
 		e.preventDefault();
-		
+
 		let updateFood = {
-		name: form.name.value,
-		description: form.description.value,
-		price: form.price.value,
-		purchaseDate: form.purchaseDate.value,
-		rating: form.rating.value
+			name: form.name.value,
+			description: form.description.value,
+			price: form.price.value,
+			purchaseDate: form.purchaseDate.value,
+			rating: form.rating.value
 		};
 		sendUpdateFood(updateFood);
 		updateFoodForm.textContent = '';
 	});
 	updateFoodForm.appendChild(button);
-	div.appendChild(updateRideForm);
+	div.appendChild(updateFoodForm);
 
 }
 
@@ -163,44 +164,44 @@ function displayError(message) {
 }
 
 function showFoodDetails(food) {
-    document.getElementById('foodType').textContent = '';
-    let fname = document.createElement('p');
-    let fdescription = document.createElement('p');
-    let fprice = document.createElement('p');
-    let fdate = document.createElement('p');
-    let frating = document.createElement('p');
-    fname.textContent = "Takeout Order: " + food.name;
-    fdescription.textContent = "Description: " + food.description;
-    fprice.textContent = "Price ($): " + food.price;
-    fdate.textContent = "Date Purchased: " + food.date;
-    frating.textContent = "Rating: " + food.rating;
+	let tbody = document.getElementById('foodTable');
+	tbody.textContent = '';
+	let fname = document.createElement('p');
+	let fdescription = document.createElement('p');
+	let fprice = document.createElement('p');
+	let fdate = document.createElement('p');
+	let frating = document.createElement('p');
+	fname.textContent = "Takeout Order: " + food.name;
+	fdescription.textContent = "Description: " + food.description;
+	fprice.textContent = "Price ($): " + food.price;
+	fdate.textContent = "Date Purchased: " + food.date;
+	frating.textContent = "Rating: " + food.rating;
 
-    let table = document.getElementById('foodType');
-    let tr = document.createElement('tr');
-    table.appendChild(tr);
-    let td = document.createElement('td');
-    td.appendChild(fname);
-    td.appendChild(document.createElement('td'));
-    td.appendChild(fdescription);
-    td.appendChild(document.createElement('td'));
-    td.appendChild(fprice);
-    td.appendChild(document.createElement('td'));
-    td.appendChild(fdate);
-    td.appendChild(document.createElement('td'));
-    td.appendChild(frating);
-    td.appendChild(document.createElement('td'));
+	let tr = document.createElement('tr');
+	tbody.appendChild(tr);
+	let td = document.createElement('td');
+	td.appendChild(fname);
+	td.appendChild(document.createElement('td'));
+	td.appendChild(fdescription);
+	td.appendChild(document.createElement('td'));
+	td.appendChild(fprice);
+	td.appendChild(document.createElement('td'));
+	td.appendChild(fdate);
+	td.appendChild(document.createElement('td'));
+	td.appendChild(frating);
+	td.appendChild(document.createElement('td'));
 
-    let update = document.createElement('button');
-    update.textContent = 'Update';
-    let remove = document.createElement('button');
-    remove.textContent = 'Delete';
-    update.addEventListener('click', function(e) {
-        updateFood(food);
-    });
-    remove.addEventListener('click', function(e) {
-        deleteFood(food);
-    });
-    table.appendChild(update);
-    table.appendChild(remove);
+	let update = document.createElement('button');
+	update.textContent = 'Update';
+	let remove = document.createElement('button');
+	remove.textContent = 'Delete';
+	update.addEventListener('click', function(e) {
+		updateFood(food);
+	});
+	remove.addEventListener('click', function(e) {
+		deleteFood(food);
+	});
+	tbody.appendChild(update);
+	tbody.appendChild(remove);
 
 }
