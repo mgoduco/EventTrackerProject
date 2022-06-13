@@ -1,7 +1,7 @@
 # EventTrackerProject
 
 ## Description
-This application is a simple event tracker which tracks spending on takeout. The user can view all previous takeout orders, individual orders, orders based on keyword of name, and orders between a certain price range. The user can also create, update, and delete orders.
+Added JavaScript functionality and added asynchronous requests to Java controllers with JavaScript's XMLHttpRequest.This application is a simple event tracker which tracks spending on takeout. The user can view all previous takeout orders, individual orders, orders based on keyword of name, and orders between a certain price range. The user can also create, update, and delete orders.
 
 ## REST Endpoints
 | Return Type        | Route           | Functionality  |
@@ -16,9 +16,11 @@ This application is a simple event tracker which tracks spending on takeout. The
 
 ## Lessons Learned
 - Handling ambiguous handler methods mapped in REST application with Spring
+- Fixing repeated server issues with port
 
 ## Technologies Used
 - Java
+- JavaScript
 - Spring REST
 - Postman
 - MySQLWorkbench

@@ -212,7 +212,7 @@ function sendUpdateFood(food) {
 
 function getFood(foodId) {
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', `api/food/${foodId}`);
+	xhr.open('GET', `api/food/${food.id}`);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200 && xhr.responseText) {
