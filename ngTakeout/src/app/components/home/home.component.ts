@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   foodList: Food[] = [];
+  newFood: Food = new Food();
+  selected: Food | null = null;
 
   constructor(
     private foodService: FoodService
@@ -28,6 +30,19 @@ export class HomeComponent implements OnInit {
         console.error('FoodComponent.reload: error loading list');
         console.error(fail);
       }
+    });
+  }
+
+  addFood(food: Food) {
+    this.foodService.create(food).subscribe({
+      next: (newFood) => {
+        this.newFood = new Food();
+        this.reload();
+      },
+      error: (fail) => {
+        console.error('FoodListComponent.addFood: error adding food');
+        console.error(fail);
+      },
     });
   }
 
