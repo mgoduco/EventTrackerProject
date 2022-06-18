@@ -1,5 +1,6 @@
+import { formatDate } from '@angular/common';
 export class Food {
-  id: number | null;
+  id: number;
   name: string | null;
   description: string | null;
   purchaseDate: string | null;
@@ -7,7 +8,7 @@ export class Food {
   rating: number | null;
 
   constructor(
-    id: number | null = 0,
+    id: number = 0,
     name: string | null = '',
     description: string | null = '',
     purchaseDate: string | null = '',

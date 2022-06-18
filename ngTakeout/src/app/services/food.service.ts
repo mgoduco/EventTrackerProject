@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError, catchError } from 'rxjs';
+import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -32,31 +33,26 @@ export class FoodService {
       })
     );
   }
-  // update(todo: Todo): Observable<Todo> {
-  //   if (todo.completed) {
-  //     todo.completeDate = this.datePipe.transform(Date.now(),'shortDate');
-  //   } else {
-  //     todo.completeDate = "";
-  //   }
+  update(food: Food): Observable<Food> {
 
-  //   return this.http.put<Todo>(this.url + "/" + todo.id, todo).pipe(
-  //   // return this.http.put<Todo>(`{this.url}/${todo.id}`, todo).pipe(
-  //     catchError((err: any) => {
-  //       console.error(err);
-  //       return throwError(
-  //         () => new Error('TodoService.update(): error updating Todo: ' + err)
-  //       );
-  //     })
-  //   );
-  // }
-  // delete(id: number): Observable<Todo> {
-  //   return this.http.delete<Todo>(`${this.url}/${id}`).pipe(
-  //     catchError((err: any) => {
-  //       console.error(err);
-  //       return throwError(
-  //         () => new Error('TodoService.create(): error deleting Todo: ' + err)
-  //       );
-  //     })
-  //   );
-  // }
+    return this.http.put<Food>(this.url + "/" + food.id, food).pipe(
+    // return this.http.put<Todo>(`{this.url}/${todo.id}`, todo).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () => new Error('FoodService.update(): error updating Food: ' + err)
+        );
+      })
+    );
+  }
+  delete(id: number): Observable<Food> {
+    return this.http.delete<Food>(`${this.url}/${id}`).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          () => new Error('FoodService.delete(): error deleting Food: ' + err)
+          );
+      })
+    );
+  }
 }

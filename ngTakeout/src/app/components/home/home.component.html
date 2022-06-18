@@ -12,7 +12,72 @@
   <button (click)="addFood(newFood)">Add Takeout Order</button>
 </div>
 
-<ul>
-<li *ngFor="let food of foodList">{{food.name}}</li>
+<div id="foodList" *ngIf="!selected">
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Date Purchased</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let food of foodList">
+        <td (click)="displayFood(food)">{{ food.name }}</td>
+        <!-- <td>
+          <input
+          type="checkbox"
+          name="completed"
+          [(ngModel)]="food.rating"
+          class="form-check"
+          (change)="updateTodo(todo, false)"
+          />
+        </td> -->
+        <td>{{ food.purchaseDate }}</td>
+        <!-- <td>{{ food.purchaseDate | date: 'mediumDate' }}</td> -->
+        <td> <button class="btn btn-danger" (click)="deleteFood(food.id)">X</button> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-</ul>
+<div id="foodDetails" *ngIf="selected && ! editFood">
+  <h4>{{ selected.id }}</h4>
+  <h3>{{ selected.name }}</h3>
+  <p>{{ selected.description }}</p>
+  <p>Purchase Date: {{ selected.purchaseDate }}</p>
+  <!-- <p>Purchase Date: {{ selected.purchaseDate | date: 'mediumDate'}}</p> -->
+  <p>Price in $ {{ selected.price }}</p>
+  <p>Rating {{ selected.rating }}</p>
+  <!-- <p>Completed: <input type="checkbox" [(ngModel)]="selected.completed"></p> -->
+  <button class="btn btn-outline-danger" (click)="displayTable()">Back</button>
+  <button class="btn btn-outline-primary" (click)="setEditFood()">Edit</button>
+</div>
+
+<div id="foodEdit" *ngIf="editFood">
+  <form class="form">
+    <label class="form-label" for="name">Food</label>
+    <input class="form-control" type="text" name="name" [(ngModel)]="editFood.name" /> <br>
+
+    <label class="form-label" for="description">Description</label>
+    <input class="form-control" type="text" name="description" [(ngModel)]="editFood.description" /> <br>
+
+    <label class="form-label" for="price">Price</label>
+    <input class="form-control" type="number" name="price" [(ngModel)]="editFood.price" /> <br>
+
+    <label class="form-label" for="rating">Rating</label>
+    <select class="form-control" name="rating" [(ngModel)]="editFood.rating">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+   </select>
+    <!-- <input class="form-control" type="text" name="rating" [(ngModel)]="editFood.rating" /> <br> -->
+
+
+
+    <button class="btn btn-danger" (click)="editFood = null">Cancel</button>
+    <button class="btn btn-primary" (click)="updateFood(editFood)">Save</button>
+  </form>
+</div>
