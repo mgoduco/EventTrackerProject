@@ -3,13 +3,13 @@
 <h3>Takeout Orders</h3>
 
 <div class="form-control" *ngIf="!selected">
-  <input type="hidden" [(ngModel)]="newFood.id" /><br />
-  Name<input type="text" [(ngModel)]="newFood.name" placeholder="Italian" /><br />
-  Description<input type="text" [(ngModel)]="newFood.description" placeholder="Cannoli" /><br />
+  <input class="form-control" type="hidden" [(ngModel)]="newFood.id" />
+  Name<input class="form-control" type="text" [(ngModel)]="newFood.name" placeholder="Italian" />
+  Description<input class="form-control" type="text" [(ngModel)]="newFood.description" placeholder="Cannoli" />
   <!-- Purchase Date<input type="text" [(ngModel)]="newFood.purchaseDate" value="06/09/2022" /><br /> -->
-  Price $<input type="number" [(ngModel)]="newFood.price" value="15"/><br />
-  Rating 1-5 <input type="number" [(ngModel)]="newFood.rating" value="4"/><br />
-  <button (click)="addFood(newFood)">Add Takeout Order</button>
+  Price $<input class="form-control" type="number" [(ngModel)]="newFood.price" value="15"/>
+  Rating 1-5 <input class="form-control" type="number" [(ngModel)]="newFood.rating" value="4"/><br>
+  <button class="btn btn-primary"  (click)="addFood(newFood)">Add Takeout Order</button>
 </div>
 
 <div id="foodList" *ngIf="!selected">
