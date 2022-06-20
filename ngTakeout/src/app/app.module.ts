@@ -8,9 +8,21 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { CreateComponent } from './components/create/create.component';
+import { DatePipe } from '@angular/common';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavBarComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    NavBarComponent,
+    ContactComponent,
+    CreateComponent,
+    AboutComponent,
+
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,7 +30,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     NgbModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

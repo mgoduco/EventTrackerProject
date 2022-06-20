@@ -40,7 +40,7 @@ export class FoodService {
       catchError((err: any) => {
         console.error(err);
         return throwError(
-          () => new Error('FoodService.update(): error updating Food: ' + err)
+          () => new Error('FoodService.create(): error creating Food: ' + err)
         );
       })
     );
@@ -50,7 +50,8 @@ export class FoodService {
       catchError((err: any) => {
         console.error(err);
         return throwError(
-          () => new Error('FoodService.delete(): error deleting Food: ' + err)
+          () => new Error('FoodService.create(): error creating Food: ' + err)
+
           );
       })
     );
